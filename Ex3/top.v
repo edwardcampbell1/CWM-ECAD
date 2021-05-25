@@ -18,13 +18,11 @@
 
 `timescale 1ns / 100ps
 
-module monitor (clk,rst,change,on_off,counter_out);
-        
- input clk,rst,change,on_off;
- output counter_out;
+module monitor (input clk,rst,change,on_off,
+ output reg [7:0]counter_out);
             
  //Todo: add registers and wires, if needed
- reg counter_out[7:0];
+
 
  //Todo: add user logic
  initial begin
@@ -39,9 +37,6 @@ module monitor (clk,rst,change,on_off,counter_out);
 	if (change == 0)
 	counter_out = counter_out;
 	else 
-		if (on_off)
-		counter_out = counter_out + 1;
-		if (on_off == 0)
-		counter_out = counter_out - 1;
+		counter_out = on_off ? counter_out + 1 : counter_out - 1;	
 	end
 endmodule

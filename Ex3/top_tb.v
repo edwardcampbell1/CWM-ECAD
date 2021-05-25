@@ -17,15 +17,16 @@ parameter CLK_PERIOD = 10;
 
 
 //Todo: Registers and wires
-reg clk,rst,change,on_off,err,counter_out
+reg clk,rst,change,on_off,err,counter_out;
 
 
 //Todo: Clock generation
-initial begin
-	clk=0;   
-	forever
-		#(CLK_PERIOD) clk=~clk; //  happens every delay of CLK_PERIOD
-end
+	initial
+	begin
+		clk=1'b0;   
+		forever
+			#(CLK_PERIOD/2) clk=~clk; //  happens every delay of CLK_PERIOD
+	end
 
 
 //Todo: User logic
@@ -33,41 +34,40 @@ end
 initial begin
  clk=0;
  rst=1;
- change=1;    
- on_off=1;
- err=0;
-	forever begin
-	if (counter_out != 0)
-		err=1;
-	end
-
-//Testing for change = 0:
-initial begin
- clk=0;
- rst=0;
  change=0;    
  on_off=1;
  err=0;
-	forever begin
-	if (counter_out != 0)
+	
+	#10 if (counter_out != 0)
+		begin err=1;
+		end
+	rst = 0; //Now test for change = 0:
+	
+	#20 if (counter_out != 0)
+		begin err=1;
+		end
+
+//Testing for change = 1:
+change = 1;
+	forever
+	begin
+	#(CLK_PERIOD*2)
+	local_counter = on_off?local_counter+1:local_counter-1;
+ 		if (local_counter!=counter_out)
+		begin
 		err=1;
+		end
 	end
 
-//Testing for 
-
 //Todo: Finish test, check for success
+ if (err==0) begin
+         $display("TEST PASSED");
+         $finish;
+ if (err==1) begin
+	$display("TEST FAILED");
+	$finish;
+end
+//Todo: Instantiate monitor module
+monitor top(clk,rst,change,on_off)
 
-begin if (err==0)
-          $display("TEST PASSED");
-        $finish;
-	if (err==1)
-		$display("TEST FAILED");
-	$finish
-      end
-
-//Todo: Instantiate counter module
-counter top (clk,rst,change,on_off);
-
-endmodule 
-
-
+endmodule
