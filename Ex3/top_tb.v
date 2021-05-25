@@ -17,7 +17,7 @@ parameter CLK_PERIOD = 10;
 
 
 //Todo: Registers and wires
-reg clk,rst,change,on_off,err,counter_out;
+reg clk,rst,change,on_off,err,[7,0]counter_out;
 
 
 //Todo: Clock generation
@@ -61,13 +61,15 @@ change = 1;
 
 //Todo: Finish test, check for success
  if (err==0) begin
-         $display("TEST PASSED");
-         $finish;
+        $display("TEST PASSED");
+        $finish;
+	end
  if (err==1) begin
 	$display("TEST FAILED");
 	$finish;
+	end
 end
 //Todo: Instantiate monitor module
-monitor top(clk,rst,change,on_off)
+monitor top(clk,rst,change,on_off,counter_out)
 
 endmodule
