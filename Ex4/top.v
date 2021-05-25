@@ -32,7 +32,7 @@ always @(posedge clk)
 		colour = 3'b001;
 	else if (button == 0)
 		colour = colour;
-	else if ((button == 1) && (colour != 3'b111))
+	else if ((button == 1) && (colour != 3'b111) && (colour != 3'b110))
 		colour = colour + 1;
 	else
 		colour = 3'b001;
