@@ -1,9 +1,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Test bench for Exercise #5 - Air Conditioning
-// Student Name:
-// Date: 
+// Student Name: Edward Campbell
+// Date: 25/05/21
 //
 // Description: A testbench module to test Ex5 - Air Conditioning
 // You need to write the whole file
 //////////////////////////////////////////////////////////////////////////////////
 
+`timescale 1ns / 100ps
