@@ -17,7 +17,9 @@ parameter CLK_PERIOD = 10;
 
 
 //Todo: Registers and wires
-reg clk,rst,change,on_off,err,[7,0]counter_out;
+reg clk,rst,change,on_off,err;
+wire [7:0]counter_out;
+reg [7:0]local_counter;
 
 
 //Todo: Clock generation
@@ -25,7 +27,7 @@ reg clk,rst,change,on_off,err,[7,0]counter_out;
 	begin
 		clk=1'b0;   
 		forever
-			#(CLK_PERIOD/2) clk=~clk; //  happens every delay of CLK_PERIOD
+			#(CLK_PERIOD/2) clk=~clk; //  happens every delay of CLK_PERIOD/2
 	end
 
 
@@ -37,6 +39,7 @@ initial begin
  change=0;    
  on_off=1;
  err=0;
+ local_counter=0;
 	
 	#10 if (counter_out != 0)
 		begin err=1;
@@ -70,6 +73,6 @@ change = 1;
 	end
 end
 //Todo: Instantiate monitor module
-monitor top(clk,rst,change,on_off,counter_out)
+monitor top(clk,rst,change,on_off,counter_out);
 
 endmodule
