@@ -40,11 +40,12 @@ forever begin
 		else
 		begin err=0;
 		end
+end
 
-//Trial response to heat = cool = 1:
+//Trial response to high initial temp:
 
-	//assign heat = 1; //updating heat and cool
-	//assign cool = 1;
+temp = 5'b11111;	
+forever begin
 	#10 if ((heat == 1 && temp > 20) || (cool == 1 && temp < 20) || (heat == 1 && cool == 1)) //confirming no illegal states in subsequenct clock cycles
 		begin err=1;
 		end
