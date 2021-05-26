@@ -14,10 +14,10 @@ module top_tb();
 parameter CLK_PERIOD = 10;
 
 reg clk;
-reg heat;
-reg cool;
+wire heat;
+wire cool;
 reg err;
-wire [4:0]temp;
+reg [4:0]temp;
 
 //Clock generation
 initial
@@ -27,11 +27,12 @@ clk = 1'b0;
         #(CLK_PERIOD/2) clk=~clk;
 end
 //start at temp = 0:
-assign temp = 5'b00000;
+
 initial
 begin
-heat = 0;
-cool = 0;
+temp = 5'b00000;
+//heat = 0;
+//cool = 0;
 forever begin
 	#10 if ((heat == 1 && temp > 20) || (cool == 1 && temp < 20) || (heat == 1 && cool == 1))
 		begin err=1;
@@ -42,8 +43,8 @@ forever begin
 
 //Trial response to heat = cool = 1:
 
-	heat = 1; //updating heat and cool
-	cool = 1;
+	//assign heat = 1; //updating heat and cool
+	//assign cool = 1;
 	#10 if ((heat == 1 && temp > 20) || (cool == 1 && temp < 20) || (heat == 1 && cool == 1)) //confirming no illegal states in subsequenct clock cycles
 		begin err=1;
 		end

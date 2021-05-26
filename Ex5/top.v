@@ -15,18 +15,18 @@
 
 `timescale 1ns / 100ps
 
-module ac(input reg clk, reg [4:0]temp,
+module ac(input clk, [4:0]temp,
 output reg heat, reg cool);
 
 //Standard operating conditions
 always @(posedge clk)
 	begin
-	heat <= (temp<18)?1: (temp>=20)?0: heat;
-	cool <= (temp<=20)?0: (temp>22)?1: cool;
+	heat <= (temp<5'd18)?1: (temp>=5'd20)?0: heat;
+	cool <= (temp<=5'd20)?0: (temp>5'd22)?1: cool;
 //Illegal state - both heat and cool on
 //resolve by setting both to zero and letting system decide which (if any) to reactivate based on temp
 	if (cool==1 & heat==1)
-		assign cool = 0;
-		assign heat = 0;
+		cool <= 0;
+		heat <= 0;
 	end
 endmodule
