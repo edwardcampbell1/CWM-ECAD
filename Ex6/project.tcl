@@ -21,6 +21,8 @@ create_fileset -constrset -quiet constraints
 #set_property is_enabled false [get_files ${project_constraints}]
 
 #Todo: add verilog modules here
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name Ex6_block_generator
+set_property -dict [list CONFIG.Component_Name {Ex6_block_generator}] [get_ips Ex6_block_generator]
 read_verilog "top.v"
 read_verilog "top_tb.v"
 
