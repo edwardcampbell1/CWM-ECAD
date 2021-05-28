@@ -13,8 +13,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module top(input clk_p, clk_n, rst_n,[4:0]temperature, output heating, cooling);
-    
+module top(input clk_p, clk_n, rst_n, temperature_0, temperature_1, temperature_2, temperature_3, temperature_4, output heating, cooling);
+
+
 
    /* clock infrastructure, do not modify */
         wire clk_ibufds;

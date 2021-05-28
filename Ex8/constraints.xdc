@@ -17,17 +17,35 @@ set_property BITSTREAM.CONFIG.SPI_FALL_EDGE YES [current_design]
 #############################################################################################################
 
 #Timing Assertions
+set_property PACKAGE_PIN AY38 [get_ports clk_n]
+set_property PACKAGE_PIN AY37 [get_ports clk_p]
+set_property IOSTANDARD DIFF_SSTL12 [get_ports clk_n]
+set_property IOSTANDARD DIFF_SSTL12 [get_ports clk_p]
 
-
+create_clock -period 10 -name my_clk [get_ports clk_p]
+set_clock_groups -asynchronous -group [get_clocks my_clk -include_generated_clocks]
 
 #Timing Exceptions
 
 
 
 #Physical Constraints
+set_property IOSTANDARD LVCMOS18 [get_ports rst_n]
+set_property PULLUP true [get_ports rst_n]
+set_property IOSTANDARD LVCMOS18 [get_ports heating]
+set_property IOSTANDARD LVCMOS18 [get_ports cooling]
+set_property IOSTANDARD LVCMOS18 [get_ports temperature_0]
+set_property IOSTANDARD LVCMOS18 [get_ports temperature_1]
+set_property IOSTANDARD LVCMOS18 [get_ports temperature_2]
+set_property IOSTANDARD LVCMOS18 [get_ports temperature_3]
+set_property IOSTANDARD LVCMOS18 [get_ports temperature_4]
 
 
-
-create_clock -period 1000.000 -name Clk -waveform {0.000 500.000}
-create_clock -period 1000.000 -name Clk -waveform {0.000 500.000}
-create_clock -period 1000.000 -name Clk -waveform {0.000 500.000}
+set_property PACKAGE_PIN BD21 [get_ports rst_n]
+set_property PACKAGE_PIN AU22 [get_ports heating]
+set_property PACKAGE_PIN AT22 [get_ports cooling]
+set_property PACKAGE_PIN BC21 [get_ports temperature_0]
+set_property PACKAGE_PIN BB21 [get_ports temperature_1]
+set_property PACKAGE_PIN BA20 [get_ports temperature_2]
+set_property PACKAGE_PIN AL20 [get_ports temperature_3]
+set_property PACKAGE_PIN AT20 [get_ports temperature_4]
