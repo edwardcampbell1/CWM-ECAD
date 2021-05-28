@@ -21,7 +21,7 @@ wire cooling;
 reg err;
 wire [4:0]temp;
 wire (temperature_0,temperature_1,temperature_2,temperature_3,temperature_4);
-assign temp = {temperature_0,temperature_1,temperature_2,temperature_3,temperature_4};
+assign temp = {temperature_4,temperature_3,temperature_2,temperature_1,temperature_0};
 
 //Clock generation
 initial

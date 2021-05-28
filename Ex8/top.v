@@ -34,6 +34,8 @@ module top(input clk_p, clk_n, rst_n, temperature_0, temperature_1, temperature_
       );
 
 //Add logic here
-ac ac(.clk (clk), .temp (temperature), .heat (heating), .cool (cooling));
+wire temp;
+assign temp = {temperature_4,temperature_3,temperature_2,temperature_1,temperature_0};
+ac ac(.clk (clk), .temp (temp), .heat (heating), .cool (cooling));
 
 endmodule
